@@ -12,16 +12,8 @@ class CountryController extends Controller
     {
         $query = $request->query('query');
 
-        $countries = DB::connection('manticore')
-            ->table('countries')
-            ->select('id', 'name')
-            ->where('name', 'like', $query . '%')
-            ->limit(10)
-            ->get();
-
-        $results = $countries->map(function ($country) {
-            return ['id' => $country->id, 'name' => $country->name];
-        });
+        $results = DB::connection('manticore')
+            ->select("SELECT * FROM countries WHERE MATCH ('*$query*')");
 
         return response()->json($results);
     }

@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('app');
+})
+->name('application');
 
 Route::get('/countries/autocomplete', [CountryController::class, 'autocomplete']);

@@ -10,6 +10,5 @@ class Country extends Model
     use HasFactory;
 
     protected $table = 'countries';
-    protected $connection = 'manticore';
     protected $fillable = ['name'];
 }

@@ -95,16 +95,18 @@ return [
 
         'manticore' => [
             'driver' => 'mysql',
-            'host' => env('MANTICORE_HOST', '127.0.0.1'),
+            'url' => env('DATABASE_URL'),
+            'host' => env('MANTICORE_HOST', 'manticore'),
             'port' => env('MANTICORE_PORT', '9306'),
             'database' => env('MANTICORE_DATABASE', ''),
             'username' => env('MANTICORE_USERNAME', ''),
             'password' => env('MANTICORE_PASSWORD', ''),
+            'unix_socket' => env('MANTICORE_SOCKET', ''),
             'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'collation' => env('MYSQL_COLLATION', 'utf8mb4_german2_ci'),
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ]) : [],
         ],
     ],
 
